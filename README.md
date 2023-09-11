@@ -30,7 +30,7 @@ git clone https://github.com/JuniorDCoder/My-Todo-App
 1. Navigate to the project directory:
 
 ```
-cd your-repo
+cd My-Todo-App
 ```
 
 2. Install PHP dependencies:
