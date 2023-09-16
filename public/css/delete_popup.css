@@ -1,0 +1,23 @@
+/* Styling for the confirmation popup */
+#confirmationPopup {
+    z-index: 9999;
+}
+
+#confirmationPopup .hidden {
+    display: none;
+}
+
+/* Styling for the blurred background */
+#confirmationPopup::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: inherit;
+    filter: blur(8px);
+    z-index: -1;
+}
+
+/* Styling for the popup content */
+#confirmationPopup .bg-white {
+    width: 500px; /* Adjust the width as desired */
+}

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->boolean('is_completed')->default(false);
-            $table->enum('priority', ['low', 'medium', 'hight'])->default('medium');
+            $table->enum('priority', ['low', 'medium', 'high'])->default('medium');
             $table->date('due_date');
             $table->timestamps();
         });
