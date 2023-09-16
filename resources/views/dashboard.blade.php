@@ -91,7 +91,9 @@
                                         {{ $overdueCount }} Overdue Tasks
                                     @endif
                             @else
-                                No Tasks Yet
+                            <div class="p-3 flex items-center justify-center text-center text-3xl text-blue-300">
+                                No Tasks Available
+                            </div>
                             @endif
                     </div>
                 </div>

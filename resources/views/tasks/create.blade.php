@@ -67,11 +67,27 @@
                                     </div>
                                 @endif
 
+                                @php
+                                    $overdueCount = $tasks->filter(function ($task) {
+                                        return \Carbon\Carbon::parse($task->due_date)->isPast();
+                                    })->count();
+                                @endphp
+
                                 <br><div class="p-1 flex items-center justify-center text-center text-3xl text-blue-300">
-                                    0 Overdue
-                                </div>
+
+                                    @if ($overdueCount == 0)
+                                        No Overdue Task
+
+                                    @elseif ($overdueCount == 1)
+                                        {{ $overdueCount }} Overdue Task
+
+                                    @else
+                                        {{ $overdueCount }} Overdue Tasks
+                                    @endif
                             @else
-                                No Tasks Yet
+                            <div class="p-3 flex items-center justify-center text-center text-3xl text-blue-300">
+                                No Tasks Available
+                            </div>
                             @endif
                     </div>
                 </div>
