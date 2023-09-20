@@ -71,6 +71,12 @@ To start the development server, run the following command:
 php artisan serve
 ```
 
+Then run node packages:
+
+```
+npm run dev
+```
+
 You can now access the application by visiting `http://localhost:8000` in your browser.
 
 ## Contributing
