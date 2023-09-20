@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\Task;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends Controller
 {
@@ -33,9 +34,13 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         //
-        $request->validate([
-            'name' => 'required|max:15|string',
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:15',
         ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 
         $category = new Category;
         $category->name = $request->name;

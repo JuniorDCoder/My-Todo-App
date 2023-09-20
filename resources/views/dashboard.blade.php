@@ -127,7 +127,7 @@
                         @if ($tasks->count() > 0)
 
                             @foreach ($tasks as $task)
-                                @if ($task->priority == 'high')
+                                @if ($task->priority == 'high' && strtotime($task->due_date) < time())
                                 <div class="bg-white rounded-lg overflow-hidden shadow-md">
                                     <div class="p-4">
                                         <h3 class="text-lg font-medium text-gray-800 dark:text-white mb-2 @if ($task->is_completed) line-through @endif">

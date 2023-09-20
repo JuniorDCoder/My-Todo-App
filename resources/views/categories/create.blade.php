@@ -87,18 +87,17 @@
                         </h3>
                         <form action="{{route('categories.store')}}" method="POST">
                             @csrf
-                            @if ($errors->any())
-                                <div class="alert alert-danger mt-2 mb-2 me-2 ms-2">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
+
                             <div class="mb-4">
                                 <label for="categoryName" class="block text-gray-700 text-sm font-bold mb-2">Category Name:</label>
-                                <input type="text" name="name" id="categoryName" class="border border-gray-300 rounded-md p-2">
+                                <input type="text" name="name" id="categoryName" class="border border-gray-300 rounded-md p-2" value="{{old('name')}}">
+
+                                @error('name')
+                                    <div class="text-red-500 mt-2 text-sm">
+                                        {{ $message }}
+                                    </div>
+
+                                @enderror
                             </div>
                             <div class="flex justify-end">
                                 <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Create</button>

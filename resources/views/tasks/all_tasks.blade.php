@@ -170,20 +170,20 @@
         </div>
         <!-- Confirmation Popup -->
         @if (isset($task))
-        <div id="confirmationPopup" class="hidden fixed inset-0 flex items-center justify-center">
-            <div class="bg-gray-300 rounded-lg p-8 max-w-md">
-                <p>This Action will delete this task (Can be retrieved from the trashed items)</p>
-                <p class="mt-1">Are you sure you want to delete this task?</p>
-                <div class="flex justify-end">
-                    <button type="button" class="mr-2 px-3 py-2 bg-gray-500 hover:bg-gray-400 text-gray-800 rounded-md" onclick="hideConfirmationPopup()">Cancel</button>
-                    <form action="{{route('task.destroy', ['task' => $task])}}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="px-3 py-2 bg-red-500 hover:bg-red-600 text-white rounded-md">Delete</button>
-                    </form>
+            <div id="confirmationPopup" class="hidden fixed inset-0 flex items-center justify-center">
+                <div class="bg-gray-300 rounded-lg p-8 max-w-md">
+                    <p>This Action will delete this task (Can be retrieved from the trashed items)</p>
+                    <p class="mt-1">Are you sure you want to delete this task?</p>
+                    <div class="flex justify-end">
+                        <button type="button" class="mr-2 px-3 py-2 bg-gray-500 hover:bg-gray-400 text-gray-800 rounded-md" onclick="hideConfirmationPopup()">Cancel</button>
+                        <form action="{{route('task.destroy', ['task' => $task])}}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="px-3 py-2 bg-red-500 hover:bg-red-600 text-white rounded-md">Delete</button>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
         @endif
 
         <!-- End of new section !-->

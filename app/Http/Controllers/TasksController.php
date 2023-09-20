@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\Task;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class TasksController extends Controller
 {
@@ -40,7 +41,7 @@ class TasksController extends Controller
     public function store(Request $request)
     {
         // Validate the form data
-        $validatedData = $request->validate([
+        $validatedData = Validator::make($request->all(), [
             'title' => 'required|max:255',
             'description' => 'required',
             'priority' => 'required|in:low,medium,high',
@@ -48,14 +49,18 @@ class TasksController extends Controller
             'due_date' => 'required|date',
         ]);
 
+        if ($validatedData->fails()) {
+            return redirect()->back()->withErrors($validatedData)->withInput();
+        }
+
         // Create a new task
         $task = new Task();
-        $task->title = $validatedData['title'];
+        $task->title = $request['title'];
         $task->user_id = Auth::user()->id;
-        $task->description = $validatedData['description'];
-        $task->priority = $validatedData['priority'];
-        $task->due_date = $validatedData['due_date'];
-        $task->category_id = $validatedData['category_id'];
+        $task->description = $request['description'];
+        $task->priority = $request['priority'];
+        $task->due_date = $request['due_date'];
+        $task->category_id = $request['category_id'];
         $task->save();
 
         // Redirect with a success message

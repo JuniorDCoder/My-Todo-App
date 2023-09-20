@@ -105,26 +105,29 @@
                             <h2 class="text-xl font-semibold mb-4">Create New Task</h2>
                             <form action="{{route('tasks.store')}}" method="POST">
                                 @csrf
-                                @if ($errors->any())
-                                    <div class="alert alert-danger mt-2 mb-2 me-2 ms-2">
-                                        <ul>
-                                            @foreach ($errors->all() as $error)
-                                                <li>{{ $error }}</li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                @endif
-
                                 <!-- Title field -->
                                 <div class="mb-4">
                                     <label for="title" class="block text-gray-700 text-sm font-bold mb-2">Title</label>
-                                    <input type="text" name="title" id="title" class="form-input rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full">
+                                    <input type="text" name="title" id="title" class="form-input rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full" value="{{old('title')}}">
+                                    @error('title')
+                                        <div class="text-red-500 mt-2 text-sm">
+                                            {{ $message }}
+                                        </div>
+
+                                    @enderror
                                 </div>
 
                                 <!-- Description field -->
                                 <div class="mb-4">
                                     <label for="description" class="block text-gray-700 text-sm font-bold mb-2">Description</label>
-                                    <textarea name="description" id="description" class="form-textarea rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full"></textarea>
+                                    <textarea name="description" id="description" class="form-textarea rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full">{{old('description')}}</textarea>
+                                    @error(
+                                        'description')
+                                        <div class="text-red-500 mt-2 text-sm">
+                                            {{ $message }}
+                                        </div>
+
+                                    @enderror
                                 </div>
 
                                 <!-- Priority field -->
@@ -150,7 +153,13 @@
                                 <!-- Due Date field -->
                                 <div class="mb-4">
                                     <label for="due_date" class="block text-gray-700 text-sm font-bold mb-2">Due Date</label>
-                                    <input type="date" name="due_date" id="due_date" class="form-input rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full">
+                                    <input type="date" name="due_date" id="due_date" class="form-input rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full" min="{{ date('Y-m-d') }}">
+                                    @error('due_date')
+                                        <div class="text-red-500 mt-2 text-sm">
+                                            {{ $message }}
+                                        </div>
+
+                                    @enderror
                                 </div>
 
                                 <!-- Submit button -->
